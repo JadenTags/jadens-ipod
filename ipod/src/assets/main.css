@@ -1,0 +1,22 @@
+::-webkit-scrollbar {
+  display: none;
+}
+
+.v-btn--disabled {
+  opacity: 100% !important;
+}
+
+@font-face {
+  font-family: 'HelveticaNeueBold';
+  src: url('./fonts/helvetica-neue-5/HelveticaNeueBold.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'HelveticaNeueBlack';
+  src: url('./fonts/helvetica-neue-5/HelveticaNeueBlack.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'HelveticaNeueMedium';
+  src: url('./fonts/helvetica-neue-5/HelveticaNeueMedium.otf') format('truetype');
+}
