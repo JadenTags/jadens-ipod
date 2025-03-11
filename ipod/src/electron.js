@@ -1,11 +1,11 @@
-import { BrowserWindow, Menu } from 'electron';
+import { app, BrowserWindow, Menu } from 'electron';
 import path from 'path';
 import config from './const.js';
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 let mainWindow;
 
-app.commandLine.appendSwitch('libwidevinecdm.dylib', '/Applications/Google Chrome.app/Contents/Versions/CHROME_VERSION/Google Chrome Framework.framework/Versions/A/Libraries/WidevineCdm/_platform_specific/mac_(x86|x64)/');
+app.commandLine.appendSwitch('widevine-cdm-path', '/Applications/Google Chrome.app/Contents/Frameworks/Google Chrome Framework.framework/Libraries/WidevineCdm');
 app.commandLine.appendSwitch('widevine-cdm-version', '4.10.2891.0');
 
 function createWindow() {

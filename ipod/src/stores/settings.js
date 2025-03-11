@@ -44,5 +44,6 @@ export const useSettingsStore = defineStore('settings', {
         repeatStatus: (state) => {
             return ['Off', 'Context', 'Track'][state.repeat];
         }
-    }
+    },
+    persist: true
 });

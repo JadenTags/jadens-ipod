@@ -3,6 +3,9 @@ import axios from '@/axios';
 import { useAuthStore } from '@/stores/auth.js';
 
 export const useSpotifyStore = defineStore('spotify', {
+    state: () => ({
+        player: null
+    }),
     actions: {
         async getData(link) {
             if (!useAuthStore().access_token) {
@@ -44,17 +47,32 @@ export const useSpotifyStore = defineStore('spotify', {
 
             try {
                 const response = await axios.put(link, data);
+                console.log(response)
                 return response.data;
             } catch (e) {
                 if (e.status == 401) {
                     console.log('Expired Token... Refreshing');
-                    await useAuthStore().getToken();
-                    return await this.getData(link);
+                    if (await useAuthStore().getToken()) {
+                        return await this.getData(link);
+                    }
                 }
             }
         },
+        async getCurrentState() {
+            const state = await this.player.getCurrentState();
+
+            console.log(state)
+        },
         async getPlaybackState() {
             return await this.getData("/me/player");
+        },
+        async getDevices() {
+            return await this.getData("/me/player/devices");
+        },
+        async transferPlayback(deviceId) {
+            return await this.putData('/me/player', {
+                device_ids: [deviceId]
+            });
         },
         async setVolume(vol) {
             return await this.putData(`/me/player/volume?volume_percent=${vol}`);
@@ -65,8 +83,8 @@ export const useSpotifyStore = defineStore('spotify', {
         async setShuffle(state) {
             return await this.putData(`/me/player/shuffle?state=${state}`);
         },
-        async play() {
-            return await this.putData('/me/player/play', {
+        async play(id=null) {
+            return await this.putData('/me/player/play' + (id ? `?device_id=${id}` : ''), {
                 position_ms: 0
             });
         },
@@ -79,6 +97,5 @@ export const useSpotifyStore = defineStore('spotify', {
         async skipPrevious() {
             return await this.postData('/me/player/previous');
         }
-    },
-    persist: true
+    }
 });

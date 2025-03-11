@@ -1,15 +1,21 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import PlayerView from '@/views/PlayerView.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import LoginView from '../views/LoginView.vue';
+import Player from '@/views/PlayerView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: PlayerView,
+      name: 'login',
+      component: LoginView
+    },
+    {
+      path: '/player',
+      name: 'player',
+      component: Player
     }
-  ],
-})
+  ]
+});
 
-export default router
+export default router;

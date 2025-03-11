@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --force",
+    "electron": "NODE_ENV=development electron ./src/electron.js",
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint . --fix",
@@ -13,9 +14,10 @@
   "dependencies": {
     "axios": "^1.8.2",
     "cors": "^2.8.5",
-    "electron": "^35.0.0",
+    "electron": "^35.0.1",
     "express": "^4.21.2",
     "pinia": "^3.0.1",
+    "pinia-plugin-persistedstate": "^4.2.0",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0",
     "vuetify": "^3.7.15"
