@@ -2,15 +2,15 @@
 import { computed, ref, shallowRef, watch, getCurrentInstance } from 'vue';
 import { useAuthStore } from '@/stores/auth';
 import { useSettingsStore } from '@/stores/settings';
-import { useSpotifyStore } from '@/stores/spotify';
 import config from '@/const.js';
-import Controls from '@/components/Controls.vue';
-import Toolbar from '@/components/Toolbar.vue';
-import MenuView from './MenuView.vue';
+import Controls from '@/components/one-time/Controls.vue';
+import Toolbar from '@/components/one-time/Toolbar.vue';
+import SwitchableMenu from '@/components/one-time/SwitchableMenu.vue';
+import SwitchableScreen from '@/components/one-time/SwitchableScreen.vue';
 import general from '@/general';
 
 const curView = ref(true);
-const screen2 = shallowRef(null);
+const screen1 = shallowRef(null)
 var screenHistory = [];
 
 export default {
@@ -27,16 +27,20 @@ export default {
   },
   data() {
     return {
-      curView: curView,
-      screen1: shallowRef(MenuView),
-      screen2: screen2
+      curView,
+      screen1
     }
+  },
+  components: {
+    SwitchableMenu,
+    SwitchableScreen
   },
   methods: {
     async nextScreen(component, ...binds) {
       screenHistory.push([Toolbar.data().title.value, {...Controls.data().controls.value}])
 
-      screen2.value = component;
+      screen1.value = component;
+      await general.nextFrame();
       curView.value = false;
 
       setTimeout(() => {
@@ -58,37 +62,12 @@ export default {
 </script>
 
 <template>
-    <v-container class="padding-0">
-        <!-- <button @click="curView = !curView" style="position: absolute;z-index: 1;">Toggle Elements</button> -->
-        <Transition name="slide" class="transition">
-            <component v-show="curView" :is="screen1"/>
-        </Transition>
-        <Transition name="slide2" class="transition">
-            <component v-show="!curView" :is="screen2"/>
-        </Transition>
-    </v-container>
+  <v-container class="padding-0">
+    <Transition name="display1" class="transition">
+      <SwitchableMenu v-show="curView"/>
+    </Transition>
+    <Transition name="display2" class="transition">
+      <SwitchableScreen v-show="!curView" :screen1="screen1"/>
+    </Transition>
+  </v-container>
 </template>
-
-<style>
-.transition {
-    position: absolute;
-    padding: 0 !important;
-    margin: 0;
-    height: 100%;
-    width: 100%;
-}
-
-.slide-leave-active, .slide-enter-active {
-   transition: all 0.3s;
- }
- .slide-enter-from, .slide-leave-to {
-   transform: translateX(-100%);
- }
-
- .slide2-leave-active, .slide2-enter-active {
-   transition: all 0.3s;
- }
- .slide2-enter-from, .slide2-leave-to {
-   transform: translateX(100%);
- }
-</style>

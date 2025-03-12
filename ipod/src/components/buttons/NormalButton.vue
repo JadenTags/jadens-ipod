@@ -3,34 +3,32 @@ defineProps({
   name: String,
   fnc: Function,
   c: Object,
-  index: Number,
-  lockedC: Boolean
+  index: Number
 });
 </script>
 
 <template>
-    <v-btn 
-      @click="lockedC ? null : fnc()" 
-      class="menuButton elevation-0" 
-      :class="{ highlightedButton: c.value == index }" 
-      :ripple="false" 
-      block
-    >
-        <span>{{ name }}</span>
-        <img v-if="c.value == index" src="@/assets/selectedIcon.png" class="selectedIcon"/>
-    </v-btn>
+  <v-btn 
+    @click="fnc()" 
+    class="menuButton elevation-0 rounded-0" 
+    :class="{ highlightedButton: c.value == index }" 
+    :ripple="false" 
+    block
+  >
+    <span>{{ name }}</span>
+    <img v-if="c.value == index" src="@/assets/selectedIcon.png" class="selectedIcon"/>
+  </v-btn>
 </template>
 
 <style>
 .menuButton {
   padding: 0 !important;
   height: 12% !important;
-  border-radius: 0 !important;
 }
 
 .menuButton span {
   margin-left: 0.5%;
-  margin-top: 0.2%;
+  margin-top: 0.5%;
   width: 100%;
   display: flex;
   font-family: HelveticaNeueBold;

@@ -17,7 +17,7 @@ export const useSettingsStore = defineStore('settings', {
     actions: {
         async syncSettings() {
             setTimeout(() => {
-                // this.syncSettings();
+                this.syncSettings();
             }, 500)
 
             const state = await useSpotifyStore().getPlaybackState();

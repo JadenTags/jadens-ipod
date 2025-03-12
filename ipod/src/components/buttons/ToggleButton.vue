@@ -4,31 +4,27 @@ defineProps({
   fnc: Function,
   status: Function,
   c: Object,
-  index: Number,
-  lockedC: Boolean
+  index: Number
 });
 </script>
 
 <template>
-    <v-btn 
-      @click="lockedC ? null : fnc()" 
-      class="menuButton elevation-0" 
-      :class="{ highlightedButton: c.value == index && !lockedC }" 
-      :ripple="false" 
-      block
-    >
-        <span>{{ name }}</span>
-        <p id="status">{{ status() }}</p>
-    </v-btn>
+  <v-btn 
+    @click="fnc()" 
+    class="menuButton elevation-0 rounded-0" 
+    :class="{ highlightedButton: c.value == index }" 
+    :ripple="false" 
+    block
+  >
+    <span>{{ name }}</span>
+    <p class="status">{{ status() }}</p>
+  </v-btn>
 </template>
 
 <style>
-#status {
-  height: 100%;
+.status {
   position: absolute;
   margin-top: 1%;
   right: 2%;
-  display: flex;
-  align-items: center;
 }
 </style>

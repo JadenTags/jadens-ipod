@@ -1,7 +1,7 @@
 <script>
 import { ref } from 'vue';
 import { useSpotifyStore } from '@/stores/spotify';
-import Toolbar from '../Toolbar.vue';
+import Toolbar from '@/components/one-time/Toolbar.vue';
 
 const onMain = ref(true);
 const playlists = ref(null);

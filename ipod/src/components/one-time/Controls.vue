@@ -11,7 +11,6 @@ const controls = ref({
     clockwiseFunc: () => {},
     counterClockwiseFunc: () => {}
 });
-
 const okButtonHovered = ref(false);
 const mouseDown = ref(false);
 var moved = false;
@@ -32,9 +31,9 @@ function getAngle(event) {
 export default {
     data() {
         return {
-            mouseDown: mouseDown,
-            okButtonHovered: okButtonHovered,
-            controls: controls
+            mouseDown,
+            okButtonHovered,
+            controls
         }
     },
     methods: {
@@ -104,23 +103,11 @@ export default {
 </template>
 
 <style scoped>
-#menuButton {
-  height: 50%;
-  width: 100%;
-  background-color: #4CAF50;
-  color: white;
-  position: absolute;
-  justify-content: center;
-  align-items: center;
-  clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
-}
-
 #okButton {
     margin-top: 32.3%;
     margin-left: 32.3%;
     height: 36%;
     width: 36%;
-    position: absolute;
     border-radius: 100%;
 }
 </style>

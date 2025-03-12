@@ -1,8 +1,7 @@
 <script setup>
-import { ref, nextTick, onMounted, watch, computed } from 'vue';
+import { ref, onMounted, watch, computed } from 'vue';
 import { useSpotifyStore } from '@/stores/spotify';
-import Toolbar from '@/components/Toolbar.vue';
-import IPodView from './iPodView.vue';
+import Toolbar from '@/components/one-time/Toolbar.vue';
 import general from '@/general';
 import { useSettingsStore } from '@/stores/settings';
 
@@ -102,8 +101,6 @@ export default {
 
 <template>
     <v-container class="margin-0">
-        <Toolbar></Toolbar>
-        
         <v-container id="nowPlayingContainer">
             <div id="imgContainer">
                 <img :src="songInfo.image" id="image"/>
@@ -139,6 +136,7 @@ export default {
     display: flex;
     background-color: white;
     height: 100%;
+    width: 100%;
     padding: 0;
     margin: 0;
 }

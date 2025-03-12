@@ -8,19 +8,19 @@ export default {
   data() {
     return {
       settingsStore: useSettingsStore(),
-      title: title
+      title
     }
   }
 }
 </script>
 
 <template>
-    <v-toolbar id="toolbar">
-      <v-toolbar-title id="title">{{ title }}</v-toolbar-title>
-      <img v-if="settingsStore.playing" id="play" class="icons" src="../assets/play.png"/>
-      <img v-else id="pause" class="icons" src="../assets/pause.png"/>
-      <img id="battery" class="icons" src="../assets/battery.png"/>
-    </v-toolbar>
+  <v-toolbar id="toolbar">
+    <v-toolbar-title id="title">{{ title }}</v-toolbar-title>
+    <img v-if="settingsStore.playing" id="play" class="icons" src="@/assets/play.png"/>
+    <img v-else id="pause" class="icons" src="@/assets/pause.png"/>
+    <img id="battery" class="icons" src="@/assets/battery.png"/>
+  </v-toolbar>
 </template>
 
 <style>
@@ -31,7 +31,7 @@ export default {
 }
 
 #toolbar {
-  background-image: url('../assets/toolbar.png');
+  background-image: url('@/assets/toolbar.png');
   background-size: contain;
   height: 8%;
   border-bottom: 1px solid rgb(84, 84, 84);
@@ -57,13 +57,5 @@ export default {
 
 #battery {
   height: 60%;
-}
-
-.class {
-  padding: 0;
-  margin: 0;
-  margin-top: 0.2vh;
-  height: 90%;
-  justify-content: end;
 }
 </style>

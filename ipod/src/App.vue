@@ -1,5 +1,5 @@
 <script setup>
-import Controls from './components/Controls.vue';
+import Controls from './components/one-time/Controls.vue';
 </script>
 
 <template>
