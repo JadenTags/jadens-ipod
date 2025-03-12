@@ -56,7 +56,7 @@ export default {
 }
 
 #battery {
-  width: 8%;
+  height: 60%;
 }
 
 .class {

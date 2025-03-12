@@ -17,7 +17,7 @@ defineProps({
       block
     >
         <span>{{ name }}</span>
-        <img v-if="c.value == index" src="../assets/selectedIcon.png" class="selectedIcon"/>
+        <img v-if="c.value == index" src="@/assets/selectedIcon.png" class="selectedIcon"/>
     </v-btn>
 </template>
 
@@ -29,8 +29,8 @@ defineProps({
 }
 
 .menuButton span {
-  margin-left: 0.7%;
-  margin-top: 1%;
+  margin-left: 0.5%;
+  margin-top: 0.2%;
   width: 100%;
   display: flex;
   font-family: HelveticaNeueBold;
@@ -40,7 +40,7 @@ defineProps({
 
 .highlightedButton {
   color: white !important;
-  background-image: url('../assets/highlighted_button.png') !important;
+  background-image: url('@/assets/highlighted_button.png') !important;
   border-bottom: 1px solid rgb(84, 84, 84) !important;
 }
 

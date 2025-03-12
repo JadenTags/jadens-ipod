@@ -5,9 +5,6 @@ import config from './const.js';
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 let mainWindow;
 
-app.commandLine.appendSwitch('widevine-cdm-path', '/Applications/Google Chrome.app/Contents/Frameworks/Google Chrome Framework.framework/Libraries/WidevineCdm');
-app.commandLine.appendSwitch('widevine-cdm-version', '4.10.2891.0');
-
 function createWindow() {
     mainWindow = new BrowserWindow({
         width: 1000, //434 1000
@@ -33,17 +30,6 @@ function createWindow() {
     
       mainWindow.on('closed', () => {
         mainWindow = null;
-      });
-
-      const contextMenu = Menu.buildFromTemplate([
-        {
-          label: 'Do something',
-          click: () => { console.log('Right-clicked'); }
-        }
-      ]);
-      mainWindow.webContents.on('context-menu', (event) => {
-        event.preventDefault();
-        contextMenu.popup({ window: mainWindow });
       });
 }
 

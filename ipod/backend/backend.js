@@ -55,7 +55,6 @@ app.get('/login', async (req, res) => {
             state: generateRandomString(16)
         });
 
-        console.log('Successful Login');
         res.redirect(`https://accounts.spotify.com/authorize?${params.toString()}`);
     } catch (e) {
         res.status(500).json({ error: 'Something went wrong' });
@@ -63,6 +62,8 @@ app.get('/login', async (req, res) => {
 });
 
 app.get('/callback', async (req, res) => {
+    console.log('Successful Login');
+    
     try {
         const response = await axios.post('https://accounts.spotify.com/api/token', {
             grant_type: 'authorization_code',
@@ -82,7 +83,7 @@ app.get('/callback', async (req, res) => {
 
         console.log('Successful Exchange');
 
-        res.redirect(`${consts.FRONTEND_URL}/player`);
+        res.redirect(`${consts.FRONTEND_URL}/home`);
     } catch (e) {
         if (e.status == 400) {
             console.log('Expired Token... Logging In');

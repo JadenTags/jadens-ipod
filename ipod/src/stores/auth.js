@@ -1,5 +1,5 @@
-import { defineStore } from 'pinia';
 import axios from '@/axios.js';
+import { defineStore } from 'pinia';
 import config from '@/const.js';
 
 export const useAuthStore = defineStore('auth', {
@@ -13,10 +13,10 @@ export const useAuthStore = defineStore('auth', {
                 axios.defaults.headers.common['Authorization'] = `Bearer ${this.access_token}`;
             } else {
                 const response = await axios.get(`http://localhost:${config.BACKEND_PORT}/tokens`);
-    
-                if (response.data.access_token) {
-                    this.access_token = response.data.access_token;
-                    this.refesh_token = response.data.refresh_token;
+
+                if (response.data.auth.access_token) {
+                    this.access_token = response.data.auth.access_token;
+                    this.refresh_token = response.data.auth.refresh_token;
                     axios.defaults.headers.common['Authorization'] = `Bearer ${this.access_token}`;
                 }
             }

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, toRef, watch } from 'vue';
+import { ref } from 'vue';
 
 const props = defineProps({
   buttons: Object,
@@ -7,15 +7,15 @@ const props = defineProps({
 });
 const lockedC = ref(false);
 
-console.log(props.c, lockedC)
-
 defineExpose({
   lockedC,
   clickCurrent: () => {
     Object.values(props.buttons.value)[props.c.value].fnc();
   },
   cycle: (up) => {
-    if (up && Object.keys(props.buttons.value).length-1 > props.c.value) {
+    var len = Object.values(props.buttons.value).filter((val) => {return val.component.__name != 'ConditionalButton' || val.props.condition()}).length;
+
+    if (up && len-1 > props.c.value) {
       props.c.value += 1;
     } else if (!up && props.c.value > 0) {
       props.c.value -= 1;

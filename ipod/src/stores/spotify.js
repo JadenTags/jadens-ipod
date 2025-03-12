@@ -1,5 +1,5 @@
-import { defineStore } from 'pinia';
 import axios from '@/axios';
+import { defineStore } from 'pinia';
 import { useAuthStore } from '@/stores/auth.js';
 
 export const useSpotifyStore = defineStore('spotify', {
@@ -47,7 +47,6 @@ export const useSpotifyStore = defineStore('spotify', {
 
             try {
                 const response = await axios.put(link, data);
-                console.log(response)
                 return response.data;
             } catch (e) {
                 if (e.status == 401) {
