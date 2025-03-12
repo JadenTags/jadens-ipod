@@ -70,6 +70,10 @@ function changeTime() {
     timeLeft.value = general.msToTime(curSong.value.duration_ms - progress.value);
 }
 
+function test(dih) {
+    spotifyStore.seekPos(Math.round(curSong.value.duration_ms * (dih.offsetX / document.getElementById('progressBar').clientWidth)));
+}
+
 watch(curSong, () => {
     updateNowPlaying();
 });
@@ -116,7 +120,7 @@ export default {
             </div>
 
             <div id="progressDiv">
-                <div id="progressBar">
+                <div id="progressBar" @click="test">
                     <div id="progress" :style="`width:${percentDone}%`"></div>
                 </div>
                 <div id="progressBarReflection">

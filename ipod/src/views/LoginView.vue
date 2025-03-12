@@ -39,10 +39,6 @@ async function loginWithSpotify() {
           component: NormalButton,
           fnc: () => {}
         },
-        'Shuffle Songs': {
-          component: NormalButton,
-          fnc: () => {}
-        },
         'Now Playing': {
           component: ConditionalButton,
           fnc: () => {},

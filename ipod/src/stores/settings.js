@@ -6,6 +6,7 @@ export const useSettingsStore = defineStore('settings', {
         playing: false,
         shuffle: false,
         repeat: 0,
+        time_range: 0,
         device_list: [],
         device: 0,
         volume: 50,
@@ -16,7 +17,7 @@ export const useSettingsStore = defineStore('settings', {
     actions: {
         async syncSettings() {
             setTimeout(() => {
-                this.syncSettings();
+                // this.syncSettings();
             }, 500)
 
             const state = await useSpotifyStore().getPlaybackState();
@@ -49,6 +50,9 @@ export const useSettingsStore = defineStore('settings', {
         cycleRepeat() {
             useSpotifyStore().setRepeat(['off', 'context', 'track'][(this.repeat + 1) % 3]);
         },
+        cycleTimeRange() {
+            this.time_range = (this.time_range + 1) % 3;
+        },
         async cycleDevice() {
             this.device = (this.device + 1) % await useSpotifyStore().getDevices().length;
 
@@ -70,6 +74,9 @@ export const useSettingsStore = defineStore('settings', {
         },
         deviceStatus: (state) => {
             return ['Other', 'iPod'][state.device];
+        },
+        timeRangeStatus: (state) => {
+            return ['1 Year', '6 Months', '4 Weeks'][state.time_range];
         }
     },
     persist: true

@@ -55,7 +55,6 @@ function changeC(bool, c) {
 .highlightedButton {
   color: white !important;
   background-image: url('@/assets/highlighted_button.png') !important;
-  border-bottom: 1px solid rgb(84, 84, 84) !important;
 }
 
 .selectedIcon {

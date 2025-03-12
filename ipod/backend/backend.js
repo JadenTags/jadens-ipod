@@ -46,7 +46,7 @@ app.post('/refresh', async (req, res) => {
 
 app.get('/login', async (req, res) => {
     try {
-        const scopes = ['streaming', 'user-read-private', 'user-read-email', 'playlist-read-private', 'user-read-playback-state', 'user-modify-playback-state'];
+        const scopes = ['streaming', 'user-library-read', 'user-read-private', 'user-read-email', 'playlist-read-private', 'user-read-playback-state', 'user-modify-playback-state'];
         const params = new URLSearchParams({
             response_type: 'code',
             client_id: config.CLIENT_ID,

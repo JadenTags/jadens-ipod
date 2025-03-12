@@ -7,6 +7,7 @@ import iPodView from './iPodView.vue';
 import NowPlayingView from './NowPlayingView.vue';
 import Controls from '@/components/Controls.vue';
 import Toolbar from '@/components/Toolbar.vue';
+import PlaylistsScreen from '@/components/screens/PlaylistsScreen.vue';
 import SwitchableScreen from '@/components/SwitchableScreen.vue';
 import GeneralMenu from '@/components/screens/GeneralMenu.vue';
 import MessageScreen from '@/components/screens/MessageScreen.vue';
@@ -22,7 +23,7 @@ const menu = shallowRef(null)
 const musicButtons = {
   'Playlists': {
     component: NormalButton,
-    fnc: () => {}
+    fnc: () => {iPodView.methods.nextScreen(PlaylistsScreen, ['menuButton', () => {iPodView.methods.previousScreen()}], ['counterClockwise', () => {PlaylistsScreen.methods.cycle(false)}], ['clockwise', () => {PlaylistsScreen.methods.cycle(true)}], ['okButton', () => {}])}
   },
   'Artists': {
     component: NormalButton,
@@ -32,7 +33,7 @@ const musicButtons = {
     component: NormalButton,
     fnc: () => {}
   },
-  'Songs': {
+  'Top Songs': {
     component: NormalButton,
     fnc: () => {}
   },
@@ -65,6 +66,13 @@ const settingsButtons = {
       status: () => {return settingsStore.repeatStatus}
     }
   },
+  'Time Range': {
+    component: ToggleButton,
+    fnc: () => {settingsStore.connected ? settingsStore.cycleTimeRange() : null},
+    props: {
+      status: () => {return settingsStore.timeRangeStatus}
+    }
+  },
   // 'Device': {
   //   component: ToggleButton,
   //   fnc: settingsStore.cycleDevice,
@@ -82,10 +90,6 @@ const buttons = {
   'Settings': {
     component: NormalButton,
     fnc: () => {menu.value.nextScreen(GeneralMenu, {buttons: shallowRef(settingsButtons), c: ref(0)})}
-  },
-  'Shuffle Songs': {
-    component: NormalButton,
-    fnc: () => {}
   },
   'Now Playing': {
     component: ConditionalButton,

@@ -36,12 +36,13 @@ defineProps({
   font-family: HelveticaNeueBold;
   text-transform: none;
   font-size: min(3vw, 2vh);
+  letter-spacing: 0;
 }
 
 .highlightedButton {
   color: white !important;
   background-image: url('@/assets/highlighted_button.png') !important;
-  border-bottom: 1px solid rgb(84, 84, 84) !important;
+  background-size: contain !important;
 }
 
 .selectedIcon {
