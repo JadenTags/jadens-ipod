@@ -60,8 +60,6 @@ export default {
 
 <template>
     <v-container id="menuScreen">
-      <Toolbar></Toolbar>
-
       <Transition name="slide" class="transition">
           <v-list id="buttonList" v-if="onMain">
             <v-btn

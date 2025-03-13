@@ -6,7 +6,9 @@ import iPodView from '@/views/iPodView.vue';
 import Controls from '@/components/one-time/Controls.vue';
 import Toolbar from '@/components/one-time/Toolbar.vue';
 import NowPlayingView from '@/components/screens/NowPlayingScreen.vue';
-import PlaylistsScreen from '@/components/screens/PlaylistsScreen.vue';
+import MediaScreen from '../screens/MediaScreen.vue';
+import SwitchableScreen from './SwitchableScreen.vue';
+import PlaylistsScreen from '@/components/screens/dih.vue';
 import GeneralMenu from '@/components/menus/GeneralMenu.vue';
 import MessageScreen from '@/components/menus/MessageMenu.vue';
 import NormalButton from '@/components/buttons/NormalButton.vue';
@@ -25,7 +27,7 @@ const buttons = {
         buttons: shallowRef({
             'Playlists': {
                 component: NormalButton,
-                fnc: () => {iPodView.methods.nextScreen(PlaylistsScreen, ['menuButton', () => {iPodView.methods.previousScreen()}], ['counterClockwise', () => {PlaylistsScreen.methods.cycle(false)}], ['clockwise', () => {PlaylistsScreen.methods.cycle(true)}], ['okButton', () => {}])}
+                fnc: () => {iPodView.methods.nextScreen(MediaScreen, 'Playlists', {getter: async () => {return await spotifyStore.getPlaylists()}}, ['menuButton', () => {iPodView.methods.previousScreen()}], ['counterClockwise', () => {console.log(SwitchableScreen.methods.getCurScreen());SwitchableScreen.data().curScreen.methods.cycle(false)}], ['clockwise', () => {SwitchableScreen.data().curScreen.methods.cycle(true)}], ['okButton', () => {}])}
             },
             'Artists': {
                 component: NormalButton,

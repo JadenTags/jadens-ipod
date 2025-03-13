@@ -10,7 +10,8 @@ import SwitchableScreen from '@/components/one-time/SwitchableScreen.vue';
 import general from '@/general';
 
 const curView = ref(true);
-const screen1 = shallowRef(null)
+const screen1 = shallowRef(null);
+const screen1Props = ref(null);
 var screenHistory = [];
 
 export default {
@@ -28,7 +29,8 @@ export default {
   data() {
     return {
       curView,
-      screen1
+      screen1,
+      screen1Props
     }
   },
   components: {
@@ -36,15 +38,19 @@ export default {
     SwitchableScreen
   },
   methods: {
-    async nextScreen(component, ...binds) {
+    async nextScreen(component, title, props=null, ...binds) {
       screenHistory.push([Toolbar.data().title.value, {...Controls.data().controls.value}])
 
+      document.body.style.setProperty('--transition-time', `0s`);
+      screen1Props.value = props;
       screen1.value = component;
       await general.nextFrame();
+      document.body.style.setProperty('--transition-time', `${config.TRANSITION_TIME}s`);
+
       curView.value = false;
 
       setTimeout(() => {
-        Toolbar.data().title.value = component.data().title;
+        Toolbar.data().title.value = title;
         Controls.methods.bind(...binds);
       }, config.TRANSITION_TIME/3 * 1000);
     },
@@ -67,7 +73,7 @@ export default {
       <SwitchableMenu v-show="curView"/>
     </Transition>
     <Transition name="display2" class="transition">
-      <SwitchableScreen v-show="!curView" :screen1="screen1"/>
+      <SwitchableScreen v-show="!curView" :props="screen1Props" :screen1="screen1"/>
     </Transition>
   </v-container>
 </template>

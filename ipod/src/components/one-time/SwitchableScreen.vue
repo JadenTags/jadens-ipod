@@ -1,37 +1,45 @@
 <script setup>
-import { ref, shallowRef } from 'vue';
+import { computed, onMounted, ref, shallowRef, useTemplateRef } from 'vue';
 import Toolbar from './Toolbar.vue';
 import Controls from './Controls.vue';
 
-const props = defineProps({
-    screen1: Object
+defineProps({
+    screen1: Object,
+    props: Object
 });
 
 const curView = ref(true);
 const screen2 = shallowRef(null);
 var screenHistory = [];
 
-function nextScreen(component, ...binds) {
-    screenHistory.push([Toolbar.data().title.value, {...Controls.data().controls.value}])
+// export default {
+//     methods: {
+//         getCurScreen() {
+//             console.log(this.$refs)
+//             return curView.value ? this.$refs.screen1 : this.$refs.screen2;
+//         },
+//         nextScreen(component, ...binds) {
+//             screenHistory.push([Toolbar.data().title.value, {...Controls.data().controls.value}])
 
-    screen2.value = component;
-    curView.value = false;
+//             screen2.value = component;
+//             curView.value = false;
 
-    setTimeout(() => {
-        Toolbar.data().title.value = component.data().title;
-        Controls.methods.bind(...binds);
-    }, config.TRANSITION_TIME/3 * 1000);
-}
+//             setTimeout(() => {
+//                 Toolbar.data().title.value = component.data().title;
+//                 Controls.methods.bind(...binds);
+//             }, config.TRANSITION_TIME/3 * 1000);
+//         },
+//         previousScreen() {
+//             if (screenHistory.length == 0) return;
 
-function previousScreen() {
-    if (screenHistory.length == 0) return;
+//             curView.value = true;
 
-    curView.value = true;
-
-    setTimeout(() => {
-        [Toolbar.data().title.value, Controls.data().controls.value] = screenHistory.pop();
-    }, config.TRANSITION_TIME/2 * 1000);
-}
+//             setTimeout(() => {
+//                 [Toolbar.data().title.value, Controls.data().controls.value] = screenHistory.pop();
+//             }, config.TRANSITION_TIME/2 * 1000);
+//         }
+//     }
+// }
 </script>
 
 <template>
@@ -41,13 +49,16 @@ function previousScreen() {
         <v-container id="menuContainer">
             <Transition name="display1" class="transition">
                 <Component
+                    ref="screen1"
                     class="switchableScreen"
                     v-show="curView"
-                    :is="props.screen1"
+                    v-bind="props"
+                    :is="screen1"
                 />
             </Transition>
             <Transition name="display2" class="transition">
                 <Component
+                    ref="screen2"
                     class="switchableScreen"
                     v-show="!curView"
                     :is="screen2"
